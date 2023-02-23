@@ -1,78 +1,78 @@
 <!DOCTYPE html>
 <html>
-<head>
-<meta charset="utf-8" />
-<title>百度地图显示车辆运行轨迹（静态）</title>
-<script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=你在百度地图开放平台申请的ak"></script>
-<!--  你在百度地图开放平台申请的ak -->
+    <head>
+        <meta charset="utf-8" />
+        <title>百度地图显示车辆运行轨迹（静态）</title>
+        <!--  replace ak with your own (registered: https://lbsyun.baidu.com/index.php?title=jspopular/guide/getkey)-->
+        <script type="text/javascript" src="http://api.map.baidu.com/api?v=2.0&ak=rNGtgGPYWcApvwpOXAMsND96iMZgYrL0"></script>
 
-<!-- 路书功能 -->
-<script type="text/javascript" src="http://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js"></script>
-</head>
-<body>
-<div id="allmap" style="position: absolute; width: 100%; top: 0px; bottom: 0px"></div>
-<script type="text/javascript">
-//添加鼠标单击事件、鼠标触发事件
-function addMarkerClickHandler( content, marker , showType) {
-//图层点击事件，像是详细信息
-    marker.addEventListener("click", function (e) {
-        openInfo(content, e);
-    });
-    //鼠标经过图层时的操作
-    marker.addEventListener("mouseover", function (e) {
-        marker.setTop(true);//设置显示在最上面，防止多图层显示在相同位置时 无法知道时哪个图层
-        marker.setIcon(icon_highlight);//设置图层高亮显示
-        if (marker.getLabel()) {
-            marker.getLabel().show();
-        }
-    });
-    //鼠标离开图层后的操作
-    marker.addEventListener("mouseout", function (e) {
-        marker.setTop(false);
-        //显示不同的颜色显示标签
-        //showType
-        //复原图层的原始图标
-        if (showType == "1") {
-            marker.setIcon(icon_red);
-        } else if (showType == "2") {
-            marker.setIcon(icon_green);
-        }
-        //隐藏图层标签内容
-        if (marker.getLabel()){
-            marker.getLabel().hide();
-        }
-    });
-}
+        <!-- 路书功能 -->
+        <script type="text/javascript" src="http://api.map.baidu.com/library/LuShu/1.2/src/LuShu_min.js"></script>
+    </head>
+    <body>
+        <div id="allmap" style="position: absolute; width: 100%; top: 0px; bottom: 0px"></div>
+        <script type="text/javascript">
+            //添加鼠标单击事件、鼠标触发事件
+            function addMarkerClickHandler( content, marker , showType) {
+                //图层点击事件，像是详细信息
+                marker.addEventListener("click", function (e) {
+                    openInfo(content, e);
+                });
+                //鼠标经过图层时的操作
+                marker.addEventListener("mouseover", function (e) {
+                    marker.setTop(true);//设置显示在最上面，防止多图层显示在相同位置时 无法知道时哪个图层
+                    marker.setIcon(icon_highlight);//设置图层高亮显示
+                    if (marker.getLabel()) {
+                        marker.getLabel().show();
+                    }
+                });
+                //鼠标离开图层后的操作
+                marker.addEventListener("mouseout", function (e) {
+                    marker.setTop(false);
+                    //显示不同的颜色显示标签
+                    //showType
+                    //复原图层的原始图标
+                    if (showType == "1") {
+                        marker.setIcon(icon_red);
+                    } else if (showType == "2") {
+                        marker.setIcon(icon_green);
+                    }
+                    //隐藏图层标签内容
+                    if (marker.getLabel()){
+                        marker.getLabel().hide();
+                    }
+                });
+            }
 
 //显示信息窗口参数及显示函数
 /** 信息窗口参数 */
 var opts = {
-width : 220, // 信息窗口宽度
-//height : 200, // 信息窗口高度
-//title : "详细信息" , // 信息窗口标题
-enableMessage : false// 设置允许信息窗发送短息
+    width : 220, // 信息窗口宽度
+    //height : 200, // 信息窗口高度
+    //title : "详细信息" , // 信息窗口标题
+    enableMessage : false// 设置允许信息窗发送短息
 };
 function openInfo(content, e) {
-var p = e.target;
-var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
-var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象
-map.openInfoWindow(infoWindow, point); // 开启信息窗口
+    var p = e.target;
+    var point = new BMap.Point(p.getPosition().lng, p.getPosition().lat);
+    var infoWindow = new BMap.InfoWindow(content, opts); // 创建信息窗口对象
+    map.openInfoWindow(infoWindow, point); // 开启信息窗口
 }
 
 
-        var map = new BMap.Map("allmap", { minZoom: 9, maxZoom: 19 });
-        var point = new BMap.Point(116.128554, 24.294562);
-        var top_left_navigation = new BMap.NavigationControl();
-        map.addControl(top_left_navigation);// 添加平移缩放控件
-        map.addControl(new BMap.ScaleControl({ anchor: BMAP_ANCHOR_TOP_LEFT })); // 添加比例尺控件
-        map.addControl(new BMap.OverviewMapControl()); //添加缩略地图控件
-        map.enableScrollWheelZoom();//启用滚轮放大缩小
-        map.centerAndZoom(point, 9);
-        var bmp_type = new BMap.MapTypeControl({ anchor: BMAP_ANCHOR_TOP_RIGHT });
-        map.addControl(bmp_type);
-       
-   
-    //显示车辆轨迹线
+var map = new BMap.Map("allmap", { minZoom: 9, maxZoom: 19 });
+var point = new BMap.Point(116.128554, 24.294562);
+var top_left_navigation = new BMap.NavigationControl();
+map.addControl(top_left_navigation);// 添加平移缩放控件
+map.addControl(new BMap.ScaleControl({ anchor: BMAP_ANCHOR_TOP_LEFT })); // 添加比例尺控件
+map.addControl(new BMap.OverviewMapControl()); //添加缩略地图控件
+map.enableScrollWheelZoom();//启用滚轮放大缩小
+map.centerAndZoom(point, 9);
+var bmp_type = new BMap.MapTypeControl({ anchor: BMAP_ANCHOR_TOP_RIGHT });
+map.addControl(bmp_type);
+
+
+//显示车辆轨迹线
 //车辆轨迹坐标
 var latLngArray = [
 "113.408984,23.174023",
@@ -94,61 +94,61 @@ var  carCenterPoint = new BMap.Point(113.408984, 23.174023);
 
 //轨迹显示样式
 var sy = new BMap.Symbol(BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {
-scale: 0.6,//图标缩放大小
-strokeColor: '#fff',//设置矢量图标的线填充颜色
-strokeWeight: '2',//设置线宽
+    scale: 0.6,//图标缩放大小
+    strokeColor: '#fff',//设置矢量图标的线填充颜色
+    strokeWeight: '2',//设置线宽
 });
 var icons = new BMap.IconSequence(sy, '10', '30');
 // 创建polyline对象
 var pois = [];
 var carOpts = {
-position: carCenterPoint,    // 指定文本标注所在的地理位置
-offset: new BMap.Size(30, -30)    //设置文本偏移量
+    position: carCenterPoint,    // 指定文本标注所在的地理位置
+    offset: new BMap.Size(30, -30)    //设置文本偏移量
 }
 var carlabel = new BMap.Label("某车辆轨迹", carOpts);  // 创建文本标注对象
 carlabel.setStyle({
-color: "red",
-fontSize: "12px",
-height: "20px",
-lineHeight: "20px",
-fontFamily: "微软雅黑"
+    color: "red",
+    fontSize: "12px",
+    height: "20px",
+    lineHeight: "20px",
+    fontFamily: "微软雅黑"
 });
 map.addOverlay(carlabel);
 map.centerAndZoom(carCenterPoint , 17);
 for(var i = 0; i < latLngArray.length ; i++) {
-var latLng = latLngArray[i];
-var pointArray = latLng.split(",");
-pois.push(new BMap.Point(pointArray[0], pointArray[1]));
+    var latLng = latLngArray[i];
+    var pointArray = latLng.split(",");
+    pois.push(new BMap.Point(pointArray[0], pointArray[1]));
 }
 var polyline = new BMap.Polyline(pois, {
-enableEditing: false,//是否启用线编辑，默认为false
-enableClicking: true,//是否响应点击事件，默认为true
-icons: [icons],
-strokeWeight: '8',//折线的宽度，以像素为单位
-strokeOpacity: 0.8,//折线的透明度，取值范围0 - 1
-strokeColor: "#18a45b" //折线颜色
+    enableEditing: false,//是否启用线编辑，默认为false
+    enableClicking: true,//是否响应点击事件，默认为true
+    icons: [icons],
+    strokeWeight: '8',//折线的宽度，以像素为单位
+    strokeOpacity: 0.8,//折线的透明度，取值范围0 - 1
+    strokeColor: "#18a45b" //折线颜色
 });
 map.addOverlay(polyline);
 
 
 //显示动画效果
 //车辆轨迹动画图标
-var icon_gps_car_run = new BMap.Icon('C:\\Users\\zgp2010\\Desktop\\icon_gpscar_run.png', new BMap.Size(32,32),{anchor: new BMap.Size(16, 16)});
+var icon_gps_car_run = new BMap.Icon('car.png', new BMap.Size(32,32),{anchor: new BMap.Size(16, 16)});
 // alert("将为您显示车辆轨迹动画效果。。。");
-//var trackContent = realName +" : "+ startTimeStr + "至"+ endTimeStr;
-var trackContent = "某车辆轨迹回放";
+//var trackContent = realName +" : "+ startTimeStr + " to "+ endTimeStr;
+var trackContent = "go home";
 // map.setViewport(pois);
 var lushu = new BMapLib.LuShu(map,pois,{
-defaultContent: trackContent,
-autoView:false,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
-icon: icon_gps_car_run,
-speed: 100,
-enableRotation:true,//是否设置marker随着道路的走向进行旋转
+    defaultContent: trackContent,
+    autoView:true,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
+    icon: icon_gps_car_run,
+    speed: 100,
+    enableRotation:true,//是否设置marker随着道路的走向进行旋转
 });
 lushu.start();
-   
- 
-    </script>
-</body>
+
+
+        </script>
+    </body>
 
 </html>
