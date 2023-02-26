@@ -94,8 +94,7 @@ var latLngArray = [
 var  carCenterPoint = new BMap.Point(113.408984, 23.174023); */
 
 var latLngArray = [
-    //JSON_DATA_PLACETAKER_BEGIN
-    //JSON_DATA_PLACETAKER_END
+    //RAW_DATA_PLACETAKER_BEGIN
 ]; 
 // console.log(latLngArray)
 var  carCenterPoint; 
@@ -109,6 +108,11 @@ for(var i = 0; i < latLngArray.length ; i++) {
         carCenterPoint = latLng; 
     }
 }
+
+var landmarks = [
+    //LAND_DATA_PLACETAKER_BEGIN
+    //{lng:116.28790773267598,lat:40.21327469838768,html:'start',pauseTime:10},
+];
 
 //轨迹显示样式
 var sy = new BMap.Symbol(BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {
@@ -148,12 +152,11 @@ map.addOverlay(polyline);
 var icon_gps_car_run = new BMap.Icon('car.png', new BMap.Size(32,32),{anchor: new BMap.Size(16, 16)});
 var trackContent = "motor travel";
 // map.setViewport(pois);
-var landmarks = [{lng:116.28790773267598,lat:40.21327469838768,html:'start',pauseTime:10},{lng:116.28581684532674,lat:40.213678874820665,html:'end',pauseTime:15}];
 var lushu = new BMapLib.LuShu(map,pois,{
     defaultContent: trackContent,
     autoView:true,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
     icon: icon_gps_car_run,
-    speed: 1000,
+    speed: 99999, // fastest speed from one stop to next stop
     enableRotation:true,//是否设置marker随着道路的走向进行旋转
     landmarkPois: landmarks
 });

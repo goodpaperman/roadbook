@@ -1,7 +1,7 @@
 #! /bin/sh
 
 if [ $# -lt 1 ]; then 
-    echo "usage: csv2json.sh csv-file"
+    echo "usage: gps2bd09.sh raw-file"
     exit 1
 fi
 
