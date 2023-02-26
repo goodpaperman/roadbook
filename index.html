@@ -146,16 +146,16 @@ map.addOverlay(polyline);
 //显示动画效果
 //车辆轨迹动画图标
 var icon_gps_car_run = new BMap.Icon('car.png', new BMap.Size(32,32),{anchor: new BMap.Size(16, 16)});
-// alert("将为您显示车辆轨迹动画效果。。。");
-//var trackContent = realName +" : "+ startTimeStr + " to "+ endTimeStr;
-var trackContent = "go home";
+var trackContent = "motor travel";
 // map.setViewport(pois);
+var landmarks = [{lng:116.28790773267598,lat:40.21327469838768,html:'start',pauseTime:10},{lng:116.28581684532674,lat:40.213678874820665,html:'end',pauseTime:15}];
 var lushu = new BMapLib.LuShu(map,pois,{
     defaultContent: trackContent,
     autoView:true,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
     icon: icon_gps_car_run,
     speed: 1000,
     enableRotation:true,//是否设置marker随着道路的走向进行旋转
+    landmarkPois: landmarks
 });
 lushu.start();
 
