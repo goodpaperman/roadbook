@@ -48,7 +48,7 @@ do
             # echo "d9ata:${data},x:$x,y:$y"
             # too many labels
             label=$(echo "${line}" | awk -F',' '{print $5}')
-            echo "{lng:$x,lat:$y,html:\"${label}\",pauseTime:${elapse}},"
+            echo "{lng:$x,lat:$y,html:'${label}',pauseTime:${elapse}},"
         fi
         prevstamp=${timestamp}
     fi

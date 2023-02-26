@@ -71,46 +71,22 @@ map.centerAndZoom(point, 9);
 var bmp_type = new BMap.MapTypeControl({ anchor: BMAP_ANCHOR_TOP_RIGHT });
 map.addControl(bmp_type);
 
-
-//显示车辆轨迹线
-//车辆轨迹坐标
-/*
 var latLngArray = [
-"113.408984,23.174023",
-"113.406639,23.174023",
-"113.403944,23.173566",
-"113.400827,23.17394",
-"113.397468,23.174496",
-"113.391494,23.174513",
-"113.389032,23.174588",
-"113.388736,23.173217",
-"113.388511,23.171888",
-"113.388592,23.170501",
-"113.38861,23.170219",
-"113.38861,23.168342",
-"113.388574,23.165218"
-];
-//中心点坐标
-var  carCenterPoint = new BMap.Point(113.408984, 23.174023); */
-
-var latLngArray = [
-    //RAW_DATA_PLACETAKER_BEGIN
+    //RAW_DATA_PLACETAKER
 ]; 
-// console.log(latLngArray)
-var  carCenterPoint; 
 
 var pois = [];
 for(var i = 0; i < latLngArray.length ; i++) {
     var latLng = latLngArray[i];
     var pointArray = latLng.split(",");
     pois.push(new BMap.Point(pointArray[0], pointArray[1]));
-    if (i === 0) {
-        carCenterPoint = latLng; 
-    }
 }
 
+carCenterPoint = pois[0]; 
+console.log("center:"+carCenterPoint.lng+","+carCenterPoint.lat); 
+
 var landmarks = [
-    //LAND_DATA_PLACETAKER_BEGIN
+    //LAND_DATA_PLACETAKER
     //{lng:116.28790773267598,lat:40.21327469838768,html:'start',pauseTime:10},
 ];
 
@@ -135,7 +111,7 @@ carlabel.setStyle({
     fontFamily: "微软雅黑"
 });
 map.addOverlay(carlabel);
-map.centerAndZoom(point , 17);
+map.centerAndZoom(carCenterPoint , 17);
 var polyline = new BMap.Polyline(pois, {
     enableEditing: false,//是否启用线编辑，默认为false
     enableClicking: true,//是否响应点击事件，默认为true
@@ -156,7 +132,7 @@ var lushu = new BMapLib.LuShu(map,pois,{
     defaultContent: trackContent,
     autoView:true,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
     icon: icon_gps_car_run,
-    speed: 99999, // fastest speed from one stop to next stop
+    speed: 10000, // fastest speed from one stop to next stop
     enableRotation:true,//是否设置marker随着道路的走向进行旋转
     landmarkPois: landmarks
 });

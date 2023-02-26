@@ -34,7 +34,7 @@ fi
 
 if [ ! -f index.data.html ]; then 
     echo "start generate file: index.data.html, the final file"
-    sed '/RAW_DATA_PLACETAKER_BEGIN/ r data.txt' index.html | sed '/LAND_DATA_PLACETAKER_BEGIN/ r data.land' > index.data.html
+    sed '/RAW_DATA_PLACETAKER/ r data.txt' index.html | sed '/LAND_DATA_PLACETAKER/ r data.land' > index.data.html
 else 
     echo "use file: index.data.html"
 fi
