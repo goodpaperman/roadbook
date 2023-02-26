@@ -12,7 +12,7 @@ while read line
 do
     if [ $n -ne 0 ]; then 
         # skip csv header
-        echo "${line}" | awk -F',' '{print $4}' | awk -F'/' '{print "\"",$1,",",$2,"\","}'
+        echo "${line}" | awk -F',' '{print $4}' | awk -F'/' '{print $1,$2}'
     fi
 
     n=$((n+1))

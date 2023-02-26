@@ -91,52 +91,24 @@ var latLngArray = [
 "113.388574,23.165218"
 ];
 //中心点坐标
-var  carCenterPoint = new BMap.Point(113.408984, 23.174023);
-*/
+var  carCenterPoint = new BMap.Point(113.408984, 23.174023); */
 
 var latLngArray = [
     //JSON_DATA_PLACETAKER_BEGIN
     //JSON_DATA_PLACETAKER_END
 ]; 
-console.log(latLngArray)
-var  carCenterPoint = new BMap.Point(116.2972, 40.05168); 
+// console.log(latLngArray)
+var  carCenterPoint; 
 
-/*
-// 百度地图API功能
-//GPS坐标
-var x = 116.2972;
-var y = 40.051684;
-var ggPoint = new BMap.Point(x,y);
-
-//地图初始化
-var bm = new BMap.Map("allmap");
-bm.centerAndZoom(ggPoint, 15);
-bm.addControl(new BMap.NavigationControl());
-
-//添加gps marker和label
-var markergg = new BMap.Marker(ggPoint);
-bm.addOverlay(markergg); //添加GPS marker
-var labelgg = new BMap.Label("未转换的GPS坐标（错误）",{offset:new BMap.Size(20,-10)});
-markergg.setLabel(labelgg); //添加GPS label
-
-//坐标转换完之后的回调函数
-translateCallback = function (data){
-  if(data.status === 0) {
-    var marker = new BMap.Marker(data.points[0]);
-    bm.addOverlay(marker);
-    var label = new BMap.Label("转换后的百度坐标（正确）",{offset:new BMap.Size(20,-10)});
-    marker.setLabel(label); //添加百度label
-    bm.setCenter(data.points[0]);
-  }
+var pois = [];
+for(var i = 0; i < latLngArray.length ; i++) {
+    var latLng = latLngArray[i];
+    var pointArray = latLng.split(",");
+    pois.push(new BMap.Point(pointArray[0], pointArray[1]));
+    if (i === 0) {
+        carCenterPoint = latLng; 
+    }
 }
-
-setTimeout(function(){
-    var convertor = new BMap.Convertor();
-    var pointArr = [];
-    pointArr.push(ggPoint);
-    convertor.translate(pointArr, 1, 5, translateCallback)
-}, 1000);
-*/
 
 //轨迹显示样式
 var sy = new BMap.Symbol(BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {
@@ -146,7 +118,6 @@ var sy = new BMap.Symbol(BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {
 });
 var icons = new BMap.IconSequence(sy, '10', '30');
 // 创建polyline对象
-var pois = [];
 var carOpts = {
     position: carCenterPoint,    // 指定文本标注所在的地理位置
     offset: new BMap.Size(30, -30)    //设置文本偏移量
@@ -161,11 +132,6 @@ carlabel.setStyle({
 });
 map.addOverlay(carlabel);
 map.centerAndZoom(point , 17);
-for(var i = 0; i < latLngArray.length ; i++) {
-    var latLng = latLngArray[i];
-    var pointArray = latLng.split(",");
-    pois.push(new BMap.Point(pointArray[0], pointArray[1]));
-}
 var polyline = new BMap.Polyline(pois, {
     enableEditing: false,//是否启用线编辑，默认为false
     enableClicking: true,//是否响应点击事件，默认为true
@@ -188,7 +154,7 @@ var lushu = new BMapLib.LuShu(map,pois,{
     defaultContent: trackContent,
     autoView:true,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
     icon: icon_gps_car_run,
-    speed: 100,
+    speed: 1000,
     enableRotation:true,//是否设置marker随着道路的走向进行旋转
 });
 lushu.start();
