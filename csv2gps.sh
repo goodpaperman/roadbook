@@ -6,10 +6,16 @@ if [ $# -lt 1 ]; then
 fi
 
 file="$1"
+line=""
 n=0
 
-while read line
+while :
 do
+    read -r line
+    if [ $? -ne 0 -a -z "${line}" ]; then 
+        break; 
+    fi
+
     if [ $n -ne 0 ]; then 
         # skip csv header
         echo "${line}" | awk -F',' '{print $4}' | awk -F'/' '{print $1,$2}'

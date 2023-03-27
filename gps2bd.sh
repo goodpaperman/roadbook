@@ -7,9 +7,15 @@ fi
 
 BAIDU_MAP_AK="rNGtgGPYWcApvwpOXAMsND96iMZgYrL0"
 file="$1"
+line=""
 
-while read line
+while :
 do
+    read -r line
+    if [ $? -ne 0 -a -z "${line}" ]; then 
+        break; 
+    fi
+
     # delete spaces
     # line="${line// /}"
     # replace space to ','

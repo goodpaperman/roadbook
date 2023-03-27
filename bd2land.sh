@@ -24,11 +24,17 @@ is_macos
 IS_MAC=$?
 csvfile="$1"
 bdfile="$2"
+line=""
 prevstamp=0
 n=0
 
-while read line
+while :
 do
+    read -r line
+    if [ $? -ne 0 -a -z "${line}" ]; then 
+        break; 
+    fi
+
     if [ $n -ne 0 ]; then 
         # skip csv header
         time=$(echo "${line}" | awk -F',' '{print $2}')
