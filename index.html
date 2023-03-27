@@ -119,7 +119,8 @@ var lushu = new BMapLib.LuShu(map,pois,{
     defaultContent: trackContent,
     autoView:true,//是否开启自动视野调整，如果开启那么路书在运动过程中会根据视野自动调整
     icon: icon_gps_car_run,
-    speed: 10000, // fastest speed from one stop to next stop
+    // speed: 10000, // fastest speed from one stop to next stop
+    speed: 1000, // too fast may lost stops and make navigate faster than video
     enableRotation:true,//是否设置marker随着道路的走向进行旋转
     landmarkPois: landmarks
 });
