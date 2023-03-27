@@ -1,7 +1,7 @@
 #! /bin/sh
 
 if [ $# -lt 1 ]; then 
-    echo "usage: gps2bd09.sh raw-file"
+    echo "usage: gps2bd09.sh gps-file"
     exit 1
 fi
 

@@ -5,27 +5,27 @@ if [ ! -f data.csv ]; then
     exit 1
 fi
 
-if [ ! -f data.raw ]; then 
-    echo "start generate file: data.raw, extract cooridnate from gps data"
-    sh csv2raw.sh data.csv > data.raw
-    # data.txt need re-generate
-    rm data.txt
+if [ ! -f data.gps ]; then 
+    echo "start generate file: data.gps, extract gps from csv data"
+    sh csv2gps.sh data.csv > data.gps
+    # data.bd need re-generate
+    rm data.bd
 else 
-    echo "use file: data.raw"
+    echo "use file: data.gps"
 fi 
 
-if [ ! -f data.txt ]; then 
-    echo "start generate file: data.txt, convert gps coordinate to baidu map"
-    sh gps2bd09.sh data.raw > data.txt
+if [ ! -f data.bd ]; then 
+    echo "start generate file: data.bd, convert gps to baidu coordinate"
+    sh gps2bd.sh data.gps > data.bd
     # index.data.html need re-generate
     rm data.land
 else 
-    echo "use file: data.txt"
+    echo "use file: data.bd"
 fi
 
 if [ ! -f data.land ]; then 
-    echo "start generate file: data.land, extract cooridnate and time from gps data"
-    sh csv2land.sh data.csv data.txt > data.land
+    echo "start generate file: data.land, extract land and time from csv & baidu coordinate"
+    sh bd2land.sh data.csv data.bd > data.land
     # final file need re-generate
     rm index.data.html
 else 
@@ -34,7 +34,7 @@ fi
 
 if [ ! -f index.data.html ]; then 
     echo "start generate file: index.data.html, the final file"
-    sed '/RAW_DATA_PLACETAKER/ r data.txt' index.html | sed '/LAND_DATA_PLACETAKER/ r data.land' > index.data.html
+    sed '/BD_DATA_PLACETAKER/ r data.bd' index.html | sed '/LAND_DATA_PLACETAKER/ r data.land' > index.data.html
 else 
     echo "use file: index.data.html"
 fi

@@ -1,7 +1,7 @@
 #! /bin/sh
 
 if [ $# -lt 2 ]; then 
-    echo "usage: csv2land.sh csv-file txt-file"
+    echo "usage: csv2land.sh csv-file bd-file"
     exit 1
 fi
 
@@ -23,7 +23,7 @@ function is_macos()
 is_macos
 IS_MAC=$?
 csvfile="$1"
-txtfile="$2"
+bdfile="$2"
 prevstamp=0
 n=0
 
@@ -40,9 +40,9 @@ do
 
         if [ ${prevstamp} -ne 0 ]; then 
             elapse=$((timestamp - prevstamp))
-            # read coodinate from data.txt instead of data.csv to prevent data incorrect
+            # read coodinate from data.bd instead of data.csv to prevent data incorrect
             #data=$(echo "${line}" | awk -F',' '{print $4}' | awk -F'/' '{print "lng:",$1,",lat:",$2}')
-            data=$(sed -n "${n}p" "${txtfile}")
+            data=$(sed -n "${n}p" "${bdfile}")
             x=$(echo "${data}" | awk -F',|"' '{print $2}')
             y=$(echo "${data}" | awk -F',|"' '{print $3}')
             # echo "d9ata:${data},x:$x,y:$y"
