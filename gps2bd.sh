@@ -13,6 +13,8 @@ while :
 do
     read -r line
     if [ $? -ne 0 -a -z "${line}" ]; then 
+        # last line without LF will trigger read return error
+        # so here check content of 'line', too
         break; 
     fi
 
