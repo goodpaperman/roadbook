@@ -61,13 +61,14 @@ function openInfo(content, e) {
 
 
 var map = new BMap.Map("allmap", { minZoom: 9, maxZoom: 19 });
-var point = new BMap.Point(116.128554, 24.294562);
+// var point = new BMap.Point(116.128554, 24.294562);
 var top_left_navigation = new BMap.NavigationControl();
 map.addControl(top_left_navigation);// 添加平移缩放控件
-map.addControl(new BMap.ScaleControl({ anchor: BMAP_ANCHOR_TOP_LEFT })); // 添加比例尺控件
-map.addControl(new BMap.OverviewMapControl()); //添加缩略地图控件
+map.addControl(new BMap.ScaleControl()); // 添加比例尺控件
+// map.addControl(new BMap.OverviewMapControl()); //添加缩略地图控件
+// map.addControl(new BMap.OverviewMapControl({isOpen:true, anchor: BMAP_ANCHOR_BOTTOM_RIGHT}));
 map.enableScrollWheelZoom();//启用滚轮放大缩小
-map.centerAndZoom(point, 9);
+// map.centerAndZoom(point, 9);
 var bmp_type = new BMap.MapTypeControl({ anchor: BMAP_ANCHOR_TOP_RIGHT });
 map.addControl(bmp_type);
 
