@@ -5,23 +5,7 @@ if [ $# -lt 2 ]; then
     exit 1
 fi
 
-# @brief: is MacOS platform
-#         mac date a little different with other
-# @retval: 0 - no
-# @retval: 1 - yes
-function is_macos()
-{
-    local os="${OSTYPE/"darwin"//}"
-    if [ "$os" != "$OSTYPE" ]; then
-        # darwin: macos
-        return 1
-    else
-        return 0
-    fi
-}
-
-is_macos
-IS_MAC=$?
+source common.sh
 csvfile="$1"
 bdfile="$2"
 line=""
