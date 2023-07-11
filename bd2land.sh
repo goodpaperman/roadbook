@@ -5,7 +5,7 @@ if [ $# -lt 2 ]; then
     exit 1
 fi
 
-source common.sh
+source ./common.sh
 csvfile="$1"
 bdfile="$2"
 line=""

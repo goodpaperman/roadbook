@@ -5,7 +5,7 @@ if [ $# -lt 1 ]; then
     exit 1
 fi
 
-source common.sh
+source ./common.sh
 BAIDU_MAP_AK="rNGtgGPYWcApvwpOXAMsND96iMZgYrL0"
 file="$1"
 end=0
