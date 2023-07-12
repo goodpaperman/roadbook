@@ -28,6 +28,7 @@ if [ ! -f data.land ]; then
     sh bd2land.sh data.csv data.bd > data.land
     # final file need re-generate
     rm index.data.html
+    rm data.wait
 else 
     echo "use file: data.land"
 fi 
