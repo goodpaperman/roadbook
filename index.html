@@ -100,15 +100,15 @@ var sy = new BMap.Symbol(BMap_Symbol_SHAPE_BACKWARD_OPEN_ARROW, {
 var icons = new BMap.IconSequence(sy, '10', '30');
 // 创建polyline对象
 map.centerAndZoom(carCenterPoint , 15);
-// var polyline = new BMap.Polyline(pois, {
-//     enableEditing: false,//是否启用线编辑，默认为false
-//     enableClicking: true,//是否响应点击事件，默认为true
-//     icons: [icons],
-//     strokeWeight: '8',//折线的宽度，以像素为单位
-//     strokeOpacity: 0.8,//折线的透明度，取值范围0 - 1
-//     strokeColor: "#18a45b" //折线颜色
-// });
-// map.addOverlay(polyline);
+var polyline = new BMap.Polyline(pois, {
+    enableEditing: false,//是否启用线编辑，默认为false
+    enableClicking: false,//是否响应点击事件，默认为true
+    icons: [icons],
+    strokeWeight: '4',//折线的宽度，以像素为单位
+    strokeOpacity: 0.7,//折线的透明度，取值范围0 - 1
+    strokeColor: "#18a45b" //折线颜色
+});
+map.addOverlay(polyline);
 
 
 //显示动画效果
